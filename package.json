@@ -1,0 +1,28 @@
+{
+  "name": "torrestorres",
+  "version": "1.0.0",
+  "description": "Aplicación del proyecto web de Torres-Torres y Asociados",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Joshua",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "connect": "^3.6.6",
+    "express": "^4.16.4",
+    "ipify": "^2.0.0",
+    "jquery": "^3.3.1",
+    "mongoose": "^5.3.8",
+    "morgan": "^1.9.1",
+    "nodemailer": "^4.6.8",
+    "nodemon": "^1.18.5",
+    "path": "^0.12.7",
+    "randomstring": "^1.1.5",
+    "request": "^2.88.0",
+    "requests": "^0.2.2",
+    "serve-static": "^1.13.2"
+  }
+}
