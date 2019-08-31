@@ -38,7 +38,7 @@ function obtenerDatosMensaje(){
                 type: 'success'//,showConfirmButton: false
             });
             setTimeout(() => {
-                location.href = URL +"/public/index.html"
+                location.href = URL
             }, 3000);
         }else{
             swal.fire({

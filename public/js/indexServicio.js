@@ -12,18 +12,19 @@ function registrarMensaje(pnombre, pcorreo, pmensaje, pcaptcha){
         data:{
             nombre : pnombre,
             correo : pcorreo,
-            mensaje : pmensaje,
+            mensaje : pmensaje, 
             captcha : pcaptcha
         }
     });
-    console.log(peticion.body);
-    peticion.done(function(response){
-    respuesta = response;
+    peticion.done(response =>{
+        respuesta = response;
+    });
+    
+    peticion.fail(response => {
+        respuesta = response;
     });
 
-    peticion.fail(function(response){
-    respuesta = response;
-    });
+    console.log('respuesta:', respuesta);
 
     return respuesta; 
 };
