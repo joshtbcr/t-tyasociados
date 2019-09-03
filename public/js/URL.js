@@ -1,5 +1,7 @@
 'use strict';
 
-var domain = "192.168.0.24",
-URL = domain + ":80",
-URLApi = domain + ":4000";
+var domain = "192.168.0.19",
+port = ":80"
+URL = 'http://'+ domain + port,
+portApi = ":4000",
+URLApi = 'http://'+ domain + portApi;
