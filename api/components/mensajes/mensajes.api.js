@@ -88,6 +88,8 @@ module.exports.registrar = (req, res) => {
     let correoInterno = 'albertorres63@hotmail.com';
 
     var transporter = nodemailer.createTransport({
+        maxConnections: 3, //<-----------ADD THIS LINE
+        pool: true,        //<-----------ADD THIS LINE
         host: "smtp-mail.outlook.com",
         secureConnection: false,
         port: 587,
@@ -113,7 +115,7 @@ module.exports.registrar = (req, res) => {
     let msgCorreoInterno = {
         from: '"Equipo T-T y Asociados" '+ correoInterno,
         to: correoInterno,
-        subject: 'Gracias por contactarnos.',
+        subject: 'Nuevo cliente en la página web.',
         html: htmlCorreoInterno
     };
     
@@ -132,18 +134,21 @@ module.exports.registrar = (req, res) => {
             }else{
                 transporter.sendMail(msgCorreoConfirmacion, (error, info) => {
                     if (error) {
-                      console.log('No se pudo enviar correo por el siguiente error: ' + error);
+                        console.log('No se pudo enviar correo por el siguiente error: ' + error);
                     } else {
-                      console.log('Correo de confirmacion enviado al nuevo cliente registrado: '+
-                       req.body.nombre +',  '+ req.body.correo+'.');
-                    }
-                });
-                transporter.sendMail(msgCorreoInterno, (error, info) => {
-                    if (error) {
-                      console.log('No se pudo enviar correo interno por el siguiente error: ' + error);
-                    } else {
-                      console.log('Correo de cliente enviado internamente.: '+
-                       req.body.nombre +',  '+ req.body.correo+'.');
+                        //Ya que el segundo correo lo hace muy rapido (async), lo ponemos dentro del callback para
+                        //que lo haga cuando termina el primero
+                        console.log('Correo de confirmacion enviado al nuevo cliente registrado: '+
+                        req.body.nombre +',  '+ req.body.correo+'.');
+                       
+                        transporter.sendMail(msgCorreoInterno, (error, info) => {
+                            if (error) {
+                            console.log('No se pudo enviar correo interno por el siguiente error: ' + error);
+                            } else {
+                            console.log('Correo de cliente enviado internamente: '+
+                            req.body.nombre +',  '+ req.body.correo+'.');
+                            }
+                        });
                     }
                 });
                 res.json(
